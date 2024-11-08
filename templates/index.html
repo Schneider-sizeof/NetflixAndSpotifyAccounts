@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix & Spotify Premium Sales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Best Offers  🎉</h1>
+        <form action="/" method="POST">
+            <label for="service">Select Service:</label>
+            <select id="service" name="service" onchange="updatePrice()" required>
+                <option value="Netflix">Netflix Premium</option>
+                <option value="Spotify">Spotify Premium</option>
+            </select>
+
+            <label for="period">Select Period:</label>
+            <select id="period" name="period" onchange="updatePrice()" required>
+                <option value="1 Month">1 Month</option>
+                <option value="3 Months">3 Months</option>
+                <option value="6 Months">6 Months</option>
+                <option value="12 Months">12 Months</option>
+            </select>
+
+            <div class="pricing-grid">
+                <!-- Netflix Grid -->
+                <div id="netflix-pricing" class="pricing" style="display: none;">
+                    
+                    <img src="{{ url_for('static', filename='netflix.png') }}" alt="Netflix Logo" class="pricing-image">
+                    <h3>Netflix Pricing</h3>
+                    <ul>
+                        <li>1 Month - $4</li>
+                        <li>3 Months - $8</li>
+                        <li>6 Months - $15</li>
+                        <li>12 Months - $20</li>
+                    </ul>
+                </div>
+
+                <!-- Spotify Grid -->
+                <div id="spotify-pricing" class="pricing" style="display: none;">
+                    
+                    <img src="{{ url_for('static', filename='Spotify.png') }}" alt="Spotify Logo" class="pricing-image">
+                    <h3>Spotify Pricing</h3>
+                    <ul>
+                        <li>1 Month - $3</li>
+                        <li>3 Months - $5</li>
+                        <li>6 Months - $15</li>
+                        <li>12 Months - $20</li>
+                    </ul>
+                </div>
+            </div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+
+            <button type="submit">Continue to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        function updatePrice() {
+            const service = document.getElementById("service").value;
+            const netflixPricing = document.getElementById("netflix-pricing");
+            const spotifyPricing = document.getElementById("spotify-pricing");
+
+            // Hide both grids
+            netflixPricing.style.display = "none";
+            spotifyPricing.style.display = "none";
+
+            // Show the appropriate pricing grid based on selected service
+            if (service === "Netflix") {
+                netflixPricing.style.display = "block";
+            } else if (service === "Spotify") {
+                spotifyPricing.style.display = "block";
+            }
+        }
+
+        // Initialize the page with the default selected service's pricing grid
+        window.onload = function() {
+            updatePrice();
+        };
+    </script>
+    <div class="footer">
+        <p>&copy; EasyConversion | Made by <a href="https://www.linkedin.com/in/ayyoubberoigui/">Beroigui ❤️</a> </p>
+    </div>
+</body>
+</html>

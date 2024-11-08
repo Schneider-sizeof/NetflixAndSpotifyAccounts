@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Load the PayPal SDK with sandbox client ID for testing -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AfuokhinvFIxxerRib3gNfHpc_atVzIspxe_caUzn3cfWULtXziezipkVZ0-JXyMnlwOsX1YvJEfTkLz&currency=USD"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Pay for Your Subscription</h2>
+        <p>Quick Delivry: you will get an email with account's informations ( within 20 min max)</p>
+        <p>Selected Service: {{ session['order_data']['service'] }} Premium </p>
+        <p>Subscription Period: {{ session['order_data']['period'] }}</p>
+        <p>Total Price: <span id="price"></span> USD</p>
+        
+        <div id="paypal-button-container"></div>
+    </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AfuokhinvFIxxerRib3gNfHpc_atVzIspxe_caUzn3cfWULtXziezipkVZ0-JXyMnlwOsX1YvJEfTkLz&currency=USD"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const pricing = {
+                "Netflix": {"1 Month": 4, "3 Months": 8, "6 Months": 15, "12 Months": 20},
+                "Spotify": {"1 Month": 3, "3 Months": 5, "6 Months": 15, "12 Months": 20}
+            };
+
+            const service = "{{ session['order_data']['service'] }}";
+            const period = "{{ session['order_data']['period'] }}";
+            const price = pricing[service][period];
+            document.getElementById('price').textContent = price;
+
+            // Ensure PayPal SDK is loaded before calling paypal.Buttons()
+            if (typeof paypal !== "undefined") {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: price.toString()
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('Transaction completed by ' + details.payer.name.given_name);
+                            window.location.href = '/confirm_payment';
+                        });
+                    }
+                }).render('#paypal-button-container');
+            } else {
+                console.error("PayPal SDK failed to load.");
+            }
+        });
+    </script>
+   
+</body>
+</html>
