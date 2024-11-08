@@ -7,32 +7,22 @@
 }
 
 body {
-    background-image: url('path/to/your/background.jpg'); /* Replace with your image path */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+    background-color: #f7f9fc;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    overflow: hidden;
+    padding: 0px;
 }
 
 .container {
-    width: 90%;
-    max-width: 600px;
-    margin: 50px auto;
+    background-color: #ffffff;
+    max-width: 800px;
+    width: 100%;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
-    border-radius: 15px;
-    backdrop-filter: blur(10px); /* Frosted glass blur */
-    -webkit-backdrop-filter: blur(10px); /* For Safari support */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Soft shadow */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
-    color: #ffffff; /* Text color for contrast */
-   
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {
