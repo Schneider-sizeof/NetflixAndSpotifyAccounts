@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Your Payment</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='preview.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="Netflix & Spotify Premium Sales">
+    <meta property="og:description" content="Purchase Netflix and Spotify premium subscriptions with flexible pricing options.">
+    <meta property="og:image" content="{{ url_for('static', filename='preview.png') }}">
+    <meta property="og:url" content="https://greatoffers.onrender.com">
+    <meta name="twitter:card" content="summary_large_image">
     <!-- Load the PayPal SDK with sandbox client ID for testing -->
     <script src="https://www.paypal.com/sdk/js?client-id=AfuokhinvFIxxerRib3gNfHpc_atVzIspxe_caUzn3cfWULtXziezipkVZ0-JXyMnlwOsX1YvJEfTkLz&currency=USD"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Pay for Your Subscription</h2>
+        <h2>Get your acocunt now</h2>
         <p>Quick Delivry: you will get an email with account's informations ( within 20 min max)</p>
         <p>Selected Service: {{ session['order_data']['service'] }} Premium </p>
         <p>Subscription Period: {{ session['order_data']['period'] }}</p>
